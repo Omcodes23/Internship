@@ -1,0 +1,143 @@
+<html>
+  <head>
+    <title>First Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+      /* CSS to display image in a circle */
+      #image {
+        width: 150px;
+        height: 150px;
+        border-radius: 10px;
+        object-fit: cover;
+        cursor: pointer;
+        border: 1px solid black; 
+      }
+      #image.uploaded {
+  animation: glow 1s ease-out infinite alternate;
+}
+
+@keyframes glow {
+  to {
+    border-color: rgb(255, 0, 0);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+  }
+}
+
+/*center frame*/
+.container-frame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,0.5);
+  backdrop-filter: blur(30px);
+  border: 2px solid black;
+  width: 90vw; /* Adjusted width for mobile screens */
+  height: 70vh; /* Adjusted height for mobile screens */
+  margin: auto;
+}
+
+      .container {
+        padding: 20px;
+      }
+
+      html, body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+/* CSS for video background */
+#video-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        z-index: -1;
+      }
+      .one{
+        color: azure;
+        font-size: 20px;
+        
+      }
+      
+    </style>
+  </head>
+
+<video id="video-background" autoplay muted loop>
+    <source src="assets/bgsmoke.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="container-frame">
+    <div class="container mt-4">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <!-- Image container -->
+<div class="text-center mb-4" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+  <label for="upload">
+    <img id="image" class="img-fluid" src="w.webp">
+  </label>
+  <input type="file" id="upload" class="d-none" accept="image/*" onchange="previewImage(event)">
+  <!-- <img src="img.png"> -->
+  <p class="one">Drag and drop an image file here</p>
+</div>
+
+          
+          <!-- Next button -->
+          <div class="text-center mt-4">
+            <button type="button" class="btn btn-primary" onclick="nextPage()">Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Function to preview image before uploading
+    function previewImage(event) {
+      const imgElement = document.getElementById('image');
+      imgElement.src = URL.createObjectURL(event.target.files[0]);
+      imgElement.classList.add('uploaded');
+    }
+    
+    // Function to navigate to Second Page with image data
+    function nextPage() {
+      const imageData = document.getElementById('image').src;
+      sessionStorage.setItem('imageData', imageData);
+      window.location.href = 'second.html';
+    }
+    // Function to handle drag and drop events
+function handleDragOver(event) {
+  event.preventDefault();
+  event.dataTransfer.dropEffect = "copy";
+}
+
+function handleDrop(event) {
+  event.preventDefault();
+  const file = event.dataTransfer.files[0];
+  const imgElement = document.getElementById('image');
+  imgElement.src = URL.createObjectURL(file);
+  imgElement.classList.add('uploaded');
+}
+
+// Function to preview image before uploading
+function previewImage(event) {
+  const imgElement = document.getElementById('image');
+  imgElement.src = URL.createObjectURL(event.target.files[0]);
+  imgElement.classList.add('uploaded');
+}
+
+// Function to navigate to Second Page with image data
+function nextPage() {
+  const imageData = document.getElementById('image').src;
+  sessionStorage.setItem('imageData', imageData);
+  window.location.href = 'second.html';
+}
+
+  </script>
+</body>
+</html>

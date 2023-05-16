@@ -1,0 +1,274 @@
+<html>
+<head>
+  <title>third Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    /* CSS to display image in a circle */
+    .image-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    /* CSS to display image in a circle */
+    #image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid rgb(245, 240, 240);
+      box-shadow: 0 0 5px rgb(223, 219, 219);
+      transition: box-shadow 0.5s;
+    }
+
+    /* CSS to add spacing between image and rating stars */
+    .rating-container {
+      margin-top: 1rem;
+    }
+
+    /* CSS to display rating stars */
+    .rating {
+      direction: rtl;
+      /* set the direction to right-to-left */
+      unicode-bidi: bidi-override;
+      /* override the default bidi algorithm */
+      font-size: 24px;
+    }
+
+    .rating {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .rating input {
+      display: none;
+    }
+
+    .rating label {
+      display: inline-block;
+      cursor: pointer;
+      color: grey;
+    }
+
+    .rating label:before {
+      content: '\2605';
+    }
+
+    .rating input:checked~label {
+      color: orange;
+    }
+
+    .container-frame {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(30px);
+      border: 2px solid rgb(245, 242, 242);
+      width: 30vw;
+      height: 110vh;
+      margin-top:200px;
+      
+      
+    }
+
+    .container {
+      padding: 0px;
+    }
+
+    /* CSS to adjust the container frame for mobile screens */
+@media only screen and (max-width: 600px) {
+  .container-frame {
+    width: 80vw;
+    height: auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+  }
+}
+
+/* CSS to adjust the container frame for larger screens */
+@media only screen and (min-width: 601px) {
+  .container-frame {
+    width: 30vw;
+    height: 110vh;
+    margin-top: 200px;
+  }
+}
+
+
+    html,
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+
+    #video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    #name {
+     
+      color: aliceblue;
+
+    }
+    #name1{
+      
+     color: black;
+    }
+
+    #mobile {
+      color: aliceblue;
+    }
+
+    #reviewc {
+      color: aliceblue;
+    }
+    #rating{
+      color: aliceblue;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      margin: 20px;
+      padding: 20px;
+    }
+    #share{
+        width:250px;
+    }
+    .hi{
+        color:black;
+        background-color: aliceblue;
+        border: 2px solid white;
+        height: 35px;
+        border-radius: 6px;
+    }
+
+
+    
+  </style>
+</head>
+
+<body>
+  <video id="video-background" autoplay muted loop>
+    <source src="assets/bgsmoke.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="container mt-4">
+    <div class="container-frame">
+      <div class="container mt-4">
+        <div class="row justify-content-center">
+          <div class="col-md-12">
+            <form>
+              <div class="row justify-content-center">
+                <div class="col-md-10">
+                  <div class="image-container">
+                    <img id="image" class="img-fluid mb-4">
+                    <div class="rating-container">
+                    </div>
+                  </div>
+                </div>
+              </div>
+             
+              <!-- <div class="form-group">
+                <label for="name" id="name">Name :</label>
+                <lable id="name"></lable>
+              </div> -->
+             
+              <!-- <div class="form-group">
+                <label for="mobile" id="mobile">Mobile Number :</label>
+                <input type="text" class="form-control" id="name1" placeholder="Enter your mobile number">
+              </div> -->
+              <div class="form-group">
+                <label for="review" id="reviewc">Review :</label>
+                <br>
+                <textarea id = "Review" class="hi" style="height:130px;width:320px;"></textarea>
+              </div>
+            
+                  <div>         </div>
+                  <p style="color:aliceblue">code is : </p>
+                  <span id="code" class="hi" style="text-align:center;font-size:30px;height:45px;"></span>
+                  <br>
+                </div>
+
+                <button type="button" class="btn btn-primary" onclick="share()">Share</button>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Retrieve image data from sessionStorage and display the image
+window.onload = function() {
+    const imageData = sessionStorage.getItem('imageData');
+    const imgElement = document.getElementById('image');
+    imgElement.src = imageData;
+    let Review = document.getElementById('Review');
+    let savedReview = sessionStorage.getItem('Review');
+    if (savedReview) {
+        Review.innerHTML = savedReview;
+    }
+
+}
+		// let uploadedImg = document.getElementById("uploadedImg");
+
+		// let selectedImg = sessionStorage.getItem("selectedImg");
+		// if (selectedImg) {
+		// 	uploadedImg.setAttribute("src", selectedImg);
+		// }
+
+        function share() {
+		let code = sessionStorage.getItem("code");
+		let shareUrl = "https://github.com/" + code;
+		navigator.share({
+			title: "Check out this image and Review!",
+			text: "I found this image and Review and wanted to share it with you.",
+			url: shareUrl,
+		})
+			.then(() => console.log("Share successful"))
+			.catch((error) => console.log("Share failed:", error));
+	}
+    
+    // function next() {
+	// 		sessionStorage.setItem("Review", document.getElementById("Review").value);
+	// 		window.location.href = "third.html";
+	// 	}
+
+    // function saveReview() {
+	// 	let Review = document.getElementById("Review").value;
+	// 	sessionStorage.setItem("Review", Review);
+	// 	window.location.href = "third.html";
+	// }
+    function generateCode() {
+		let chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		let code = "";
+
+		for (let i = 0; i < 5; i++) {
+			let randomIndex = Math.floor(Math.random() * chars.length);
+			code += chars.charAt(randomIndex);
+		}
+
+		return code;
+	}
+    let code = generateCode();
+	sessionStorage.setItem("code", code);
+	document.getElementById("code").innerHTML = code;
+
+  </script>
+</body>
+</html>
