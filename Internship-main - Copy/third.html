@@ -1,0 +1,300 @@
+<html>
+<head>
+  <title>third Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  
+  <style>
+    /* CSS to display image in a circle */
+    .image-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    /* CSS to display image in a circle */
+    #image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid rgb(245, 240, 240);
+      box-shadow: 0 0 5px rgb(223, 219, 219);
+      transition: box-shadow 0.5s;
+    }
+
+    .container-frame {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(30px);
+      border: 2px solid rgb(245, 242, 242);
+      width: 30vw;
+      height: 130vh;
+      margin-top:200px;
+      padding:20px;
+      
+      
+      
+    }
+
+    .container {
+      padding: 0px;
+    }
+
+    /* CSS to adjust the container frame for mobile screens */
+@media only screen and (max-width: 600px) {
+  .container-frame {
+    width: 80vw;
+    height: auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+  }
+}
+
+/* CSS to adjust the container frame for larger screens */
+@media only screen and (min-width: 601px) {
+  .container-frame {
+    width: 30vw;
+    height: 110vh;
+    margin-top: 200px;
+  }
+}
+
+
+    html,
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+
+    #video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    #name {
+     
+      color: aliceblue;
+
+    }
+    #name1{
+      
+     color: black;
+    }
+
+    #mobile {
+      color: aliceblue;
+    }
+
+    #reviewc {
+      color: aliceblue;
+    }
+    #rating{
+      color: aliceblue;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      margin: 20px;
+      padding: 20px;
+    }
+    
+
+    .hi {
+  background-color: aliceblue;
+  color: black;
+  font-size: 28px;
+  padding: 3px;
+  border: 2px solid black;
+  border-radius: 5px;
+  text-align: center;
+  
+}
+
+button {
+  font-family: inherit;
+  font-size: 20px;
+  background: dodgerblue;
+  color: white;
+  padding: 0.7em 1em;
+  padding-left: 0.9em;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.2s;
+  
+}
+
+button span {
+  display: block;
+  margin-left: 0.3em;
+  transition: all 0.3s ease-in-out;
+}
+
+button svg {
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+button:hover .svg-wrapper {
+  animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+button:hover svg {
+  transform: translateX(1.2em) rotate(45deg) scale(1.1);
+}
+
+button:hover span {
+  transform: translateX(5em);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+@keyframes fly-1 {
+  from {
+    transform: translateY(0.1em);
+  }
+
+  to {
+    transform: translateY(-0.1em);
+  }
+}
+
+textarea, input[type="text"] {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+</style>
+</head>
+
+<body>
+  <video id="video-background" autoplay muted loop>
+    <source src="assets/bgsmoke.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="container mt-4">
+    <div class="container-frame">
+      <div class="container mt-4">
+        <div class="row justify-content-center">
+          <div class="col-md-12">
+            <form>
+              <div class="row justify-content-center">
+                <div class="col-md-10">
+                  <div class="image-container">
+                    <img id="image" class="img-fluid mb-4">
+                    <div class="rating-container">
+                    </div>
+                  </div>
+                </div>
+              </div>
+             
+              <div class="form-group">
+                <label for="review" id="reviewc">Review :</label>
+                <br>
+                <textarea id="Review" style="height: 90px; border-radius: 5px; padding: 10px;"></textarea>
+              </div>
+            
+                  <div>    </div>     
+                  <p style="color: aliceblue">code is : </p>
+                  <span id="code" class="hi" ></span>
+                  <br>
+                  <p style="color:aliceblue">Ratings:</h1>
+                    <div id="ratings" class="hi"></div>
+              </div>
+              <button type="button" class="button" style="column-span: 10px;" onclick="share()">
+                  <div class="svg-wrapper-1">
+                    <div class="svg-wrapper">
+                      <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z" fill="currentColor"></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <span>Send</span>
+                </button>
+                
+                
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Retrieve image data from sessionStorage and display the image
+window.onload = function() {
+    const imageData = sessionStorage.getItem('imageData');
+    const imgElement = document.getElementById('image');
+    imgElement.src = imageData;
+    let Review = document.getElementById('Review');
+    let savedReview = sessionStorage.getItem('Review');
+    if (savedReview) {
+        Review.innerHTML = savedReview;
+    }
+}
+
+function share() {
+		let code = sessionStorage.getItem("code");
+		let shareUrl = "https://omcodes23.github.io/Internship/" + code;
+		navigator.share({
+			title: "Check out this image and Review!",
+			text: "I found this image and Review and wanted to share it with you.",
+			url: shareUrl,
+		})
+			.then(() => console.log("Share successful"))
+			.catch((error) => console.log("Share failed:", error));
+	}
+  
+function generateCode() {
+		let chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		let code = "";
+
+		for (let i = 0; i < 5; i++) {
+			let randomIndex = Math.floor(Math.random() * chars.length);
+			code += chars.charAt(randomIndex);
+		}
+
+		return code;
+	}
+  let code = generateCode();
+	sessionStorage.setItem("code", code);
+	document.getElementById("code").innerHTML = code;
+
+  document.addEventListener("DOMContentLoaded", function() {
+      var rating = localStorage.getItem("rating");
+      if (rating) {
+        var ratingsDiv = document.getElementById("ratings");
+        ratingsDiv.innerHTML = "You rated: " + rating + " stars.";
+        localStorage.removeItem("rating");
+      } else {
+        var ratingsDiv = document.getElementById("ratings");
+        ratingsDiv.innerHTML = "No ratings yet.";
+      }
+    });
+
+  </script>
+</body>
+</html>

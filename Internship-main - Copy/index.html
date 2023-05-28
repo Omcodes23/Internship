@@ -1,0 +1,136 @@
+<html>
+<head>
+  <title>First Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    /* CSS to display image in a circle */
+    #image {
+      width: 150px;
+      height: 150px;
+      border-radius: 10px;
+      object-fit: cover;
+      cursor: pointer;
+      border: 1px solid black; 
+    }
+    
+    /* Center frame */
+    .container-frame {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(30px);
+      border: 2px solid black;
+      width: 90vw;
+      height: 70vh;
+      margin: auto;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    html, body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+    /* CSS for video background */
+    #video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .one {
+      color: azure;
+      font-size: 20px;
+    }
+    
+    button {
+      font-size: 17px;
+      padding: 0.5em 2em;
+      border: transparent;
+      box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+      background: dodgerblue;
+      color: white;
+      border-radius: 4px;
+    }
+
+    button:hover {
+      background: rgb(2,0,36);
+      background: linear-gradient(90deg, rgba(30,144,255,1) 0%, rgba(0,212,255,1) 100%);
+    }
+
+    button:active {
+      transform: translate(0em, 0.2em);
+    }
+    
+  </style>
+</head>
+
+<body>
+  <video id="video-background" autoplay muted loop>
+    <source src="assets/bgsmoke.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="container-frame">
+    <div class="container mt-4">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <!-- Image container -->
+          <div class="text-center mb-4" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <label for="upload">
+              <img id="image" class="img-fluid" src="w.webp">
+            </label>
+            <input type="file" id="upload" class="d-none" accept="image/*" onchange="previewImage(event)">
+            <p class="one">Drag and drop an image file here</p>
+            <!-- Centered upload button -->
+            <div class="d-flex justify-content-center mt-3">
+              <button onclick="nextPage()">Upload</button>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Function to handle drag and drop events
+    function handleDragOver(event) {
+      event.preventDefault();
+      event.dataTransfer.dropEffect = "copy";
+    }
+
+    function handleDrop(event) {
+      event.preventDefault();
+      const file = event.dataTransfer.files[0];
+      const imgElement = document.getElementById('image');
+      imgElement.src = URL.createObjectURL(file);
+      imgElement.classList.add('uploaded');
+    }
+
+    // Function to preview image before uploading
+    function previewImage(event) {
+      const imgElement = document.getElementById('image');
+      imgElement.src = URL.createObjectURL(event.target.files[0]);
+      imgElement.classList.add('uploaded');
+    }
+
+    // Function to navigate to Second Page with image data
+    function nextPage() {
+      const imageData = document.getElementById('image').src;
+      sessionStorage.setItem('imageData', imageData);
+      window.location.href = 'second.html';
+    }
+  </script>
+</body>
+</html>

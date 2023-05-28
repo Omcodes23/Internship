@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>5 Star Ratings</title>
+ 
+</head>
+<body>
+  <h1>Rate this item:</h1>
+  <div class="rating">
+    <span onclick="rate(1)">&#9734;</span>
+    <span onclick="rate(2)">&#9734;</span>
+    <span onclick="rate(3)">&#9734;</span>
+    <span onclick="rate(4)">&#9734;</span>
+    <span onclick="rate(5)">&#9734;</span>
+  </div>
+  
+  <button class="submit-btn" onclick="submitRating()">Submit</button>
+
+  <script>
+    function rate(rating) {
+      localStorage.setItem("rating", rating);
+    }
+
+    function submitRating() {
+      window.location.href = "second.html";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<html>
+<head>
+  <title>Second Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    /* CSS to display image in a circle */
+    .image-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    /* CSS to display image in a circle */
+    #image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid rgb(245, 240, 240);
+      box-shadow: 0 0 5px rgb(223, 219, 219);
+      transition: box-shadow 0.5s;
+    }
+
+    /* CSS to add spacing between image and rating stars */
+    .rating-container {
+      margin-top: 1rem;
+    }
+
+    /* CSS to display rating stars */
+    .rating {
+      direction: rtl;
+      /* set the direction to right-to-left */
+      unicode-bidi: bidi-override;
+      /* override the default bidi algorithm */
+      font-size: 24px;
+    }
+
+    .rating {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .rating input {
+      display: none;
+    }
+
+    .rating label {
+      display: inline-block;
+      cursor: pointer;
+      color: grey;
+    }
+
+    .rating label:before {
+      content: '\2605';
+    }
+
+    .rating input:checked~label {
+      color: orange;
+    }
+
+    .container-frame {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(30px);
+      border: 2px solid rgb(245, 242, 242);
+      width: 30vw;
+      height: 110vh;
+      margin-top:200px;
+      
+      
+    }
+
+    .container {
+      padding: 0px;
+    }
+
+    /* CSS to adjust the container frame for mobile screens */
+@media only screen and (max-width: 600px) {
+  .container-frame {
+    width: 80vw;
+    height: auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+  }
+}
+
+/* CSS to adjust the container frame for larger screens */
+@media only screen and (min-width: 601px) {
+  .container-frame {
+    width: 30vw;
+    height: 110vh;
+    margin-top: 200px;
+  }
+}
+
+
+    html,
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+
+    #video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    #name {
+     
+      color: aliceblue;
+
+    }
+    #name1{
+      
+     color: black;
+    }
+
+    #mobile {
+      color: aliceblue;
+    }
+
+    #review {
+      color: aliceblue;
+    }
+    #rating{
+      color: aliceblue;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      margin: 20px;
+      padding: 20px;
+    }
+    
+  </style>
+</head>
+
+<body>
+  <video id="video-background" autoplay muted loop>
+    <source src="assets/bgsmoke.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="container mt-4">
+    <div class="container-frame">
+      <div class="container mt-4">
+        <div class="row justify-content-center">
+          <div class="col-md-12">
+            <form>
+              <div class="row justify-content-center">
+                <div class="col-md-10">
+                  <div class="image-container">
+                    <img id="image" class="img-fluid mb-4">
+                    <div class="rating-container">
+                    </div>
+                  </div>
+                </div>
+              </div>
+             
+              <div class="form-group">
+                <label for="name" id="name">Name :</label>
+                <input type="text" class="form-control" id="name1" placeholder="Enter your name">
+              </div>
+             
+              <div class="form-group">
+                <label for="mobile" id="mobile">Mobile Number :</label>
+                <input type="text" class="form-control" id="name1" placeholder="Enter your mobile number">
+              </div>
+              <div class="form-group">
+                <label for="Review" style="color:aliceblue">Review :</label>
+                <textarea class="form-control" id="Review" name="Review" style="color:black;" placeholder="Enter your review"></textarea>
+              </div>
+              <div class="form-group">
+
+                <label for="rating" id="rating">Rating : </label>
+                <div class="rating">
+                  <input type="radio" id="star5" name="rating" value="5"  onclick="rate(5)" />
+                  <label for="star5" title="5 star"></label>
+                  <input type="radio" id="star4" name="rating" value="4"  onclick="rate(4)"/>
+                  <label for="star4" title="4 stars"></label>
+                  <input type="radio" id="star3" name="rating" value="3"  onclick="rate(3)"/>
+                  <label for="star3" title="3 stars"></label>
+                  <input type="radio" id="star2" name="rating" value="2" onclick="rate(2)" />
+                  <label for="star2" title="2 stars"></label>
+                  <input type="radio" id="star1" name="rating" value="1" onclick="rate(1)" />
+                  <label for="star1" title="1 stars"></label>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary" onclick="nextPage()">Submit</button>
+              <!-- <button type="button" onclick="saveReview()">Next</button> -->
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Retrieve image data from sessionStorage and display the image
+    const imageData = sessionStorage.getItem('imageData');
+    const imgElement = document.getElementById('image');
+    imgElement.src = imageData;
+
+    
+    // Function to navigate to Second Page with image data
+    function nextPage() {
+      const imageData = document.getElementById('image').src;
+      let Review = document.getElementById("Review").value;
+      sessionStorage.setItem('imageData', imageData);
+		  sessionStorage.setItem("Review", Review);
+      window.location.href = 'third.html';
+		  
+    }
+    
+    function next() {
+			sessionStorage.setItem("Review", document.getElementById("Review").value);
+			window.location.href = "third.html";
+		}
+
+    function saveReview() {
+		let Review = document.getElementById("Review").value;
+		sessionStorage.setItem("Review", Review);
+		window.location.href = "third.html";
+	}
+  function rate(rating){
+    localStorage.setItem("rating",rating)
+  }
+
+  </script>
+</body>
+</html>
